@@ -1,0 +1,32 @@
+# VitalSense
+
+## Project Description
+VitalSense is a comprehensive, intelligent healthcare monitoring dashboard. It enables real-time patient vital tracking, proactive health alert generation using an AI-driven risk prediction model, and seamless communication between patients and doctors. Designed with a premium, responsive interface featuring glassmorphism elements, VitalSense bridges the gap between continuous health monitoring and timely clinical intervention.
+
+## Features
+- **Real-Time Vitals Dashboard:** Visualize current metrics like heart rate, blood pressure, oxygen level, and body temperature using Recharts.
+- **AI-Powered Health Alerts:** Integrates a Scikit-learn machine learning model via FastAPI to predict health risks and trigger critical alerts automatically.
+- **Responsive Premium UI:** A modern, dark-themed responsive interface with glassmorphism styling, accessible on both desktop and mobile platforms.
+- **Role-Based Authentication:** Secure login and registration flows for both Patients and Doctors.
+- **Simulated Wearable Data:** Automated backend job that simulates real-time patient data streams and processes them through the AI model.
+- **Review Protocol Modal:** Interactive clinical guidance interface for doctors to respond to patient health alerts immediately.
+
+## Tech Stack
+### Frontend
+- **React.js**: UI Library
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Recharts**: Data visualization library for vitals
+- **React Router**: Client-side routing
+- **Lucide React**: Iconography
+
+### Backend
+- **Node.js & Express.js**: RESTful API server
+- **MongoDB & Mongoose**: NoSQL database and object data modeling
+
+### AI Microservice
+- **Python & FastAPI**: Lightweight web framework for serving the ML model
+- **Scikit-Learn**: Machine learning library for training the health risk prediction model
+- **Joblib**: Model serialization
+
+## Installation
+*(To be completed)*
