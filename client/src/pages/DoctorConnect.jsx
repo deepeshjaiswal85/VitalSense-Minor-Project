@@ -3,7 +3,10 @@ import { useSearchParams } from 'react-router-dom';
 import { Send, Phone, Video, Paperclip, User, Search, MessageCircle } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+
 const DoctorConnect = () => {
+
   const [searchParams] = useSearchParams();
   const doctorIdFromUrl = searchParams.get('id');
   
@@ -29,7 +32,7 @@ const DoctorConnect = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const res = await fetch('https://vitalsense-jvbd.onrender.com/api/doctor/list');
+        const res = await fetch(`${BASE_URL}/api/doctor/list`);
         if (res.ok) {
           const doctors = await res.json();
           setDoctorList(doctors);
@@ -51,7 +54,7 @@ const DoctorConnect = () => {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch('https://vitalsense-jvbd.onrender.com/api/doctor/messages');
+      const res = await fetch(`${BASE_URL}/api/doctor/messages`);
       if (res.ok) {
         const data = await res.json();
         // Only show messages where sender or receiver is the current patient AND the other party is the assigned doctor
@@ -82,7 +85,7 @@ const DoctorConnect = () => {
 
   const markAsRead = async (doctorId) => {
     try {
-      await fetch(`https://vitalsense-jvbd.onrender.com/api/doctor/messages/read/${doctorId}`, {
+      await fetch(`${BASE_URL}/api/doctor/messages/read/${doctorId}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -134,7 +137,7 @@ const DoctorConnect = () => {
     scrollToBottom();
 
     try {
-      const res = await fetch('https://vitalsense-jvbd.onrender.com/api/doctor/messages', {
+      const res = await fetch(`${BASE_URL}/api/doctor/messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newMessage)

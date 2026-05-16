@@ -2,7 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AlertTriangle, Clock, Filter, AlertCircle, Info, Activity } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+
 const Alerts = () => {
+
   const { user } = useContext(AuthContext);
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,8 +14,8 @@ const Alerts = () => {
     const fetchAlerts = async () => {
       try {
         const endpoint = user.role === 'doctor' 
-          ? 'https://vitalsense-jvbd.onrender.com/api/doctor/alerts' 
-          : 'https://vitalsense-jvbd.onrender.com/api/patient/my-alerts';
+          ? `${BASE_URL}/api/doctor/alerts` 
+          : `${BASE_URL}/api/patient/my-alerts`;
         
         const response = await fetch(endpoint, {
           headers: {

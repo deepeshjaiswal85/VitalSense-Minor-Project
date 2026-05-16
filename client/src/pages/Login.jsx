@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Activity, Mail, Lock, User, Hash } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+
 const Login = () => {
   const [activeTab, setActiveTab] = useState('patient'); // 'patient' or 'doctor'
   const [formData, setFormData] = useState({
@@ -21,7 +23,8 @@ const Login = () => {
     // Ping the server on mount to wake it up if it's on a free tier (Render cold start)
     const pingServer = async () => {
       try {
-        await fetch('https://vitalsense-jvbd.onrender.com/api/health');
+
+        await fetch(`${BASE_URL}/api/health`);
       } catch (err) {
         console.log('Server wake-up ping failed, but that is okay.');
       }
@@ -44,7 +47,8 @@ const Login = () => {
     }, 3000);
 
     try {
-      const endpoint = 'https://vitalsense-jvbd.onrender.com/api/auth/login';
+
+      const endpoint = `${BASE_URL}/api/auth/login`;
       const payload = activeTab === 'patient' 
         ? { name: formData.name, patientId: formData.patientId }
         : { email: formData.email, password: formData.password };

@@ -9,6 +9,8 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -18,6 +20,7 @@ L.Icon.Default.mergeOptions({
 
 // Calculate distance using Haversine formula
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
+
   const R = 6371; // Radius of the earth in km
   const dLat = (lat2 - lat1) * Math.PI / 180;  
   const dLon = (lon2 - lon1) * Math.PI / 180; 
@@ -49,7 +52,7 @@ const NearbyHospitals = () => {
   useEffect(() => {
     const fetchHospitals = async (lat, lon) => {
       try {
-        const response = await fetch(`https://vitalsense-jvbd.onrender.com/api/maps/hospitals?lat=${lat}&lon=${lon}`);
+        const response = await fetch(`${BASE_URL}/api/maps/hospitals?lat=${lat}&lon=${lon}`);
         
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));

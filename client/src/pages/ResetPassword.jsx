@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Activity, Lock } from 'lucide-react';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+
 const ResetPassword = () => {
+
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -24,7 +27,7 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://vitalsense-jvbd.onrender.com/api/auth/reset-password', {
+      const response = await fetch(`${BASE_URL}/api/auth/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, newPassword })

@@ -3,6 +3,8 @@ import { AuthContext } from '../context/AuthContext';
 import { Users, AlertTriangle, Activity, Search } from 'lucide-react';
 
 const DoctorDashboard = () => {
+  const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : `${BASE_URL}`;
+
   const { user } = useContext(AuthContext);
   const [patients, setPatients] = useState([]);
   const [alerts, setAlerts] = useState([]);
@@ -16,11 +18,11 @@ const DoctorDashboard = () => {
         const headers = { 'x-auth-token': user.token };
         
         // Fetch Patients
-        const patRes = await fetch('https://vitalsense-jvbd.onrender.com/api/doctor/patients', { headers });
+        const patRes = await fetch(`${BASE_URL}/api/doctor/patients`, { headers });
         const patData = patRes.ok ? await patRes.json() : [];
         
         // Fetch Alerts
-        const alertRes = await fetch('https://vitalsense-jvbd.onrender.com/api/doctor/alerts', { headers });
+        const alertRes = await fetch(`${BASE_URL}/api/doctor/alerts`, { headers });
         const alertData = alertRes.ok ? await alertRes.json() : [];
 
         setPatients(patData);
