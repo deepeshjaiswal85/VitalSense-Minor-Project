@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Send, Phone, Video, Paperclip, User, Search, MessageCircle } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
-const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-minor-project-backend.onrender.com';
 
 const DoctorConnect = () => {
 

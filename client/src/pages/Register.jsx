@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Activity, Mail, Lock, User, Calendar, Users } from 'lucide-react';
 
-const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-minor-project-backend.onrender.com';
 
 const Register = () => {
   const [activeTab, setActiveTab] = useState('patient'); // 'patient' or 'doctor'
