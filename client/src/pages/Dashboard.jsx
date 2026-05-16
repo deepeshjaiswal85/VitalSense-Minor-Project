@@ -130,7 +130,7 @@ const VitalCard = ({ title, value, unit, icon, status, colorClass, borderClass, 
 );
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(true);
   const lastAlertLevel = useRef('');
@@ -156,7 +156,7 @@ const Dashboard = () => {
 
   const BASE_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:5000' 
-    : 'https://vitalsense-jvbd.onrender.com';
+    : `${BASE_URL}`;
 
   const [doctors, setDoctors] = useState([]);
 
@@ -187,6 +187,11 @@ const Dashboard = () => {
           const res = await fetch(`${BASE_URL}/api/vitals/${user.patientId}`, {
             headers: { 'x-auth-token': user.token }
           });
+          if (res.status === 401) {
+            logout();
+            navigate('/login');
+            return;
+          }
           if (res.ok) {
             const data = await res.json();
             if (data.length > 0) {
@@ -205,6 +210,12 @@ const Dashboard = () => {
         const simRes = await fetch(`${BASE_URL}/api/health`, {
           headers: { 'x-auth-token': user.token }
         });
+        
+        if (simRes.status === 401) {
+          logout();
+          navigate('/login');
+          return;
+        }
         
         if (simRes.ok) {
           const simData = await simRes.json();
@@ -267,6 +278,11 @@ const Dashboard = () => {
         const res = await fetch(`${BASE_URL}/api/patient/my-alerts`, {
           headers: { 'x-auth-token': user.token }
         });
+        if (res.status === 401) {
+          logout();
+          navigate('/login');
+          return;
+        }
         if (res.ok) {
           const data = await res.json();
           setActivities(data.slice(0, 5).map(alert => ({
@@ -536,8 +552,8 @@ const Dashboard = () => {
               </select>
             </div>
           </div>
-          <div className="h-[250px] md:h-[350px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="h-[250px] md:h-[350px] w-full" style={{ minWidth: 0, minHeight: 0 }}>
+            <ResponsiveContainer width="99%" height="100%">
               <AreaChart data={dynamicTrendData.length > 0 ? dynamicTrendData : trendData} margin={{ top: 20, right: 10, left: -20, bottom: 5 }}>
                 <defs>
                   <linearGradient id="colorSys" x1="0" y1="0" x2="0" y2="1">

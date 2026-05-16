@@ -3,7 +3,10 @@ import { Bell, User, Search, Menu } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+
 const Header = ({ setIsMobileMenuOpen }) => {
+
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +24,7 @@ const Header = ({ setIsMobileMenuOpen }) => {
 
     const checkMessages = async () => {
       try {
-        const res = await fetch('https://vitalsense-jvbd.onrender.com/api/doctor/messages');
+        const res = await fetch(`${BASE_URL}/api/doctor/messages`);
         if (res.ok) {
           const data = await res.json();
           // Filter messages for current user

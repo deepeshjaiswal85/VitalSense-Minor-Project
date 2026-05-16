@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { X, User, Calendar, Users, MapPin, FileText, Phone } from 'lucide-react';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+
 const AdmissionForm = ({ isOpen, onClose }) => {
+
   const [formData, setFormData] = useState({
     patientName: '',
     age: '',
@@ -25,7 +28,7 @@ const AdmissionForm = ({ isOpen, onClose }) => {
     setMessage('');
 
     try {
-      const response = await fetch('https://vitalsense-jvbd.onrender.com/api/admissions', {
+      const response = await fetch(`${BASE_URL}/api/admissions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

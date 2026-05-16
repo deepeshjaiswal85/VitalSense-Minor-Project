@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Activity, Mail, Lock, User, Calendar, Users } from 'lucide-react';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+
 const Register = () => {
   const [activeTab, setActiveTab] = useState('patient'); // 'patient' or 'doctor'
   const [formData, setFormData] = useState({
@@ -35,7 +37,8 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const endpoint = 'https://vitalsense-jvbd.onrender.com/api/auth/register';
+
+      const endpoint = `${BASE_URL}/api/auth/register`;
       const payload = { ...formData, role: activeTab };
 
       const response = await fetch(endpoint, {
