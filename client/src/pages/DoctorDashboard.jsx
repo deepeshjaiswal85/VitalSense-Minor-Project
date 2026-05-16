@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Users, AlertTriangle, Activity, Search } from 'lucide-react';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-minor-project-backend.onrender.com';
+
 const DoctorDashboard = () => {
-  const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : `${BASE_URL}`;
+
 
   const { user } = useContext(AuthContext);
   const [patients, setPatients] = useState([]);
