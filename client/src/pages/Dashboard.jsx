@@ -5,6 +5,8 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import AdmissionForm from '../components/AdmissionForm';
 import { AuthContext } from '../context/AuthContext';
 
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-minor-project-backend.onrender.com';
+
 // Simulated Health Data for trends
 const trendData = [
   { time: '08:00', hr: 72, bpSys: 118, bpDia: 78 },
@@ -154,10 +156,6 @@ const Dashboard = () => {
     hrTrend: "stable"
   });
 
-  const BASE_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:5000' 
-    : `${BASE_URL}`;
-
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
@@ -173,7 +171,7 @@ const Dashboard = () => {
       }
     };
     fetchDoctors();
-  }, [BASE_URL]);
+  }, []);
 
   useEffect(() => {
     const fetchVitals = async () => {
@@ -269,7 +267,7 @@ const Dashboard = () => {
     const interval = setInterval(fetchVitals, 5000); // Poll every 5 seconds
     
     return () => clearInterval(interval);
-  }, [user, BASE_URL]);
+  }, [user, logout, navigate]);
 
   useEffect(() => {
     const fetchActivities = async () => {
@@ -298,7 +296,7 @@ const Dashboard = () => {
     fetchActivities();
     const interval = setInterval(fetchActivities, 10000); // Update activities every 10s
     return () => clearInterval(interval);
-  }, [user, BASE_URL]);
+  }, [user, logout, navigate]);
 
   // Custom Tooltip for the chart
   const CustomTooltip = ({ active, payload, label }) => {
