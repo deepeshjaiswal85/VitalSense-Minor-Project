@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, User, Calendar, Users, MapPin, FileText, Phone } from 'lucide-react';
 
-const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-jvbd.onrender.com';
+const BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://vitalsense-minor-project-backend.onrender.com';
 
 const AdmissionForm = ({ isOpen, onClose }) => {
 
